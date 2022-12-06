@@ -1,4 +1,4 @@
-package com.socialise.ws.user;
+package user;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,11 +11,11 @@ import lombok.Data;
 @Table(name="users")
 @Data
 
-public class User {
-	
+public class Users {
 	
 	@Id
 	@GeneratedValue
+	private long id;
 	
 	private String username;
 	

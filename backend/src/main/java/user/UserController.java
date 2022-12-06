@@ -1,4 +1,4 @@
-package com.socialise.ws.user;
+package user;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ public class UserController {
 
 	@CrossOrigin
 	@PostMapping("/api/1.0/users")
-	public void createUser(@RequestBody User user) {
+	public void createUser(@RequestBody Users user) {
 		log.info(user.toString());
 		
 	}
