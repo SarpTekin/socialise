@@ -1,6 +1,5 @@
 import React from "react";
-import axios from "axios";
-
+import {signup} from '../api/apiCalls';
 class UserSignUpPage extends React.Component{
 
     state = {
@@ -8,7 +7,8 @@ class UserSignUpPage extends React.Component{
         agreeClicked: false,
         displayName: null,
         password: null,
-        passwordRepeat: null
+        passwordRepeat: null,
+        pendingApiCall: false
     };
 
     onChange = event => {
@@ -18,7 +18,7 @@ class UserSignUpPage extends React.Component{
         });
     };
 
-    onClickSignUp = event => {
+    onClickSignUp = async event => {
         event.preventDefault();
 
         const {username, displayName, password} = this.state;
@@ -29,10 +29,20 @@ class UserSignUpPage extends React.Component{
             password
         };
 
-        axios.post('/api/1.0/users' , body);
-    }
+        this.setState({pendingApiCall: true});
+
+        
+
+        try {
+            const response = await signup(body);
+        }catch (error) {}
+
+        this.setState({pendingApiCall: false});
+        
+    };
 
     render(){
+        const {pendingApiCall} = this.state;
         return (
             <div className="container">
                 <form>
@@ -55,7 +65,12 @@ class UserSignUpPage extends React.Component{
                     </div>
                     <div className="form-group">
                         <div className="text-center">
-                        <button className="btn btn-primary" onClick={this.onClickSignUp}>Sign Up</button>  
+                        <button 
+                            className="btn btn-primary" 
+                            onClick={this.onClickSignUp}
+                            disabled={pendingApiCall}
+                            >{pendingApiCall && <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>}Sign Up
+                        </button>  
                         </div> 
                     </div>
                                                           
