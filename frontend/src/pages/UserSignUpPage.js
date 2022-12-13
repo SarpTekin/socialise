@@ -9,15 +9,16 @@ class UserSignUpPage extends React.Component{
         password: null,
         passwordRepeat: null,
         pendingApiCall: false,
-        errors: {
-            
-        }
+        errors: {}
     };
 
     onChange = event => {
         const {name, value} = event.target;
+        const errors = {...this.state.errors}
+        errors[name] = undefined
         this.setState({
-            [name]: value
+            [name]: value,
+            errors
         });
     };
 
@@ -39,7 +40,10 @@ class UserSignUpPage extends React.Component{
         try {
             const response = await signup(body);
         }catch (error) {
-            this.setState({ errors: error.response.data.validationErrors});
+            if(error.response.data.validationErrors){
+                this.setState({ errors: error.response.data.validationErrors});
+            }
+
         }
 
         this.setState({pendingApiCall: false});
