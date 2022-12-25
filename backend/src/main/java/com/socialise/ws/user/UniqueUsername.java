@@ -27,7 +27,7 @@ import jakarta.validation.constraints.NotNull.List;
 @Retention(RUNTIME)
 @Constraint(validatedBy = { UniqueUsernameValidator.class})
 public @interface UniqueUsername {
-    String message() default "{Username must be unique}";
+    String message() default "{}";
 
     Class<?>[] groups() default { };
 

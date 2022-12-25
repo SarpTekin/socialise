@@ -15,16 +15,16 @@ public class User {
 	@Id
 	@GeneratedValue
 	private long id;
-	@NotNull
+	@NotNull(message = "{socialise.constraint.username.NotNull.message}")
 	@Size(min = 4, max = 20)
-	@UniqueUsername
+	@UniqueUsername(message = "{socialise.constraint.UniqueUsername.Pattern.message}")
 	private String username;
 	@NotNull
 	@Size(min = 4, max = 20)
 	private String displayName;
 	@NotNull
 	@Size(min = 8, max = 20)
-	//@Pattern(regexp = "^(?=.[a-z])(?=.[A-Z])(?=.\\d).$")
+	@Pattern(regexp = "^(?=.[a-z])(?=.[A-Z])(?=.\\d).$", message="{socialise.constraint.password.Pattern.message}")
 	private String password;
 	
 }
