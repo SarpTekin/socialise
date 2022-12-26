@@ -7,11 +7,17 @@ import LoginPage from "./pages/LoginPage";
 import reportWebVitals from './reportWebVitals';
 import './bootstrap-override.scss';
 import './i18n';
+import languageSelector from "./components/LanguageSelector";
+import LanguageSelector from "./components/LanguageSelector";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <LoginPage />
+      <div>
+          <LoginPage />
+          <LanguageSelector />
+      </div>
+
   </React.StrictMode>
 );
 
